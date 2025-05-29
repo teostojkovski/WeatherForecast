@@ -40,8 +40,12 @@ Make sure that MySQL is running, then run the Spring Boot Application. After a s
 
 
 
-### API:
-API Keys available at https://home.openweathermap.org/api_keys
+### API Key Setup:
+To fetch weather data, you need an API key from OpenWeatherMap.  
+Steps:  
+1. Register at OpenWeatherMap and generate your free API key.  
+2. In application.properties, replace the placeholder with your actual API key:  
+<pre lang="markdown">   openweathermap.api.key=c911428c59cb38affeca30a8ca021827</pre>
 
 
 ## Testing:
