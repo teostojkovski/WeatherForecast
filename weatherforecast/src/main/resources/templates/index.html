@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Macedonian Weather Forecast</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Macedonian Weather Forecast</h1>
+            <p class="subtitle">5-day/3 hours forecast for Skopje, Ohrid, and Kicevo</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('hot-days')">Hot Days</button>
+            <button class="tab-btn" onclick="showTab('rainy-days')">Rainy Days</button>
+        </div>
+
+        <div id="hot-days" class="tab-content active">
+            <h2>Days with Temperature > 25°C</h2>
+            <div class="weather-grid" id="hot-days-grid">
+                <div th:each="forecast : ${hotDays}" class="weather-card">
+                    <div class="city-name" th:text="${forecast.city}">City</div>
+                    <div class="date" th:text="${#temporals.format(forecast.date, 'dd MMM yyyy')}">Date</div>
+                    <div class="temperature">
+                        <i class="fas fa-temperature-high"></i>
+                        <span th:text="${#numbers.formatDecimal(forecast.maxTemperature, 1, 1)} + '°C'">25°C</span>
+                    </div>
+                    <div class="description" th:text="${forecast.description}">Weather description</div>
+                    <div class="status" th:classappend="${forecast.rainy ? 'rainy' : 'sunny'}" 
+                         th:text="${forecast.rainy ? 'Rainy' : 'Sunny'}">Status</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="rainy-days" class="tab-content">
+            <h2>Rainy Days Forecast</h2>
+            <div class="weather-grid" id="rainy-days-grid">
+                <div th:each="forecast : ${rainyDays}" class="weather-card">
+                    <div class="city-name" th:text="${forecast.city}">City</div>
+                    <div class="date" th:text="${#temporals.format(forecast.date, 'dd MMM yyyy')}">Date</div>
+                    <div class="temperature">
+                        <i class="fas fa-temperature-high"></i>
+                        <span th:text="${#numbers.formatDecimal(forecast.maxTemperature, 1, 1)} + '°C'">25°C</span>
+                    </div>
+                    <div class="description" th:text="${forecast.description}">Weather description</div>
+                    <div class="status rainy">Rainy</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabId).classList.add('active');
+            
+            // Add active class to clicked button
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html> 
