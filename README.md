@@ -1,45 +1,48 @@
-# 🌤️ Weather Forecast Application
+# Weather Forecast Application
 
-## 📌 Project Overview
+## Project Overview
 
-This project is a web application in **Java (Spring Boot)** that fetches and displays the **5 Day / 3 Hour Forecast** for **Skopje**, **Kičevo**, and **Ohrid** using the **OpenWeatherMap API**.
+This project is a web application built with Java and Spring Boot that fetches and displays the 5-Day / 3-Hour weather forecast for Skopje, Kičevo, and Ohrid using the OpenWeatherMap API.
+Due to the 16-day forecast being a paid feature, the free 5-day forecast was used instead. The application highlights the days when the temperature exceeds 25°C. All forecast data is stored in a MySQL database, and users can access the results through a REST API and a simple, responsive web interface. 
 
-> ⚠️ Note: The 16-day forecast is a paid feature. This app uses the 5-day forecast available in the free plan.
+## Technologies Used
 
-The project highlights the days where the temperature exceeds **25°C**. The data is stored in a **MySQL database**, and users can access results via a **REST API** and a **simple web interface**.
+-	Java with Spring Boot
+-	MySQL
+-	OpenWeatherMap API
+-	HTML & CSS
+-	AJAX & JSON
+-	JUnit 
 
----
+## Project Setup
 
-## 🛠️ Technologies Used
+### Requirements:
+-	Java 17+
+-	Maven
+-	MySQL
+-	IDE (IntelliJ)
 
-- **Java with Spring Boot**
-- **MySQL**
-- **OpenWeatherMap API**
-- **HTML & CSS**
-- **AJAX & JSON**
-- **JUnit (for testing)**
+### Database Setup:
 
----
+1. Create a MySQL database (e.g. weather_db).
+2. To connect the backend with the database, update the file src/main/resources/application.properties with the following:
+<pre lang="markdown">   spring.datasource.url=jdbc:mysql://localhost:3306/weather_db 
+   spring.datasource.username=your_username 
+   spring.datasource.password=your_password 
+   spring.jpa.hibernate.ddl-auto=update</pre>
 
-## ⚙️ Project Setup
+Make sure that MySQL is running, then run the Spring Boot Application. After a successful start you should be able to see the web interface on http://localhost:8080. The API endpoints with JSON responses are available on:
+- Web Interface:
+  - http://localhost:8080
+- API Endpoints (JSON responses):
+   - http://localhost:8080/api/forecast/hot-days – returns days where temperature exceeds 25°C
+   - http://localhost:8080/api/forecast/rainy-days – returns days with rain
 
-### ✅ Requirements
 
-- Java 17+
-- Maven
-- MySQL
-- IDE (e.g., IntelliJ IDEA)
 
----
+### API:
+API Keys available at https://home.openweathermap.org/api_keys
 
-### 🗄️ Database Setup
 
-1. Create a MySQL database (e.g., `weather_db`).
-2. Configure the connection in:  
-   `src/main/resources/application.properties`:
-
-   ```properties
-   spring.datasource.url=jdbc:mysql://localhost:3306/weather_db
-   spring.datasource.username=your_username
-   spring.datasource.password=your_password
-   spring.jpa.hibernate.ddl-auto=update
+## Testing:
+Unit tests are located in src/test/java/com.example.weatherforecast/.
